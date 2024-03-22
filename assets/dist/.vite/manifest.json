@@ -1,0 +1,13 @@
+{
+  "assets/src/css/app.scss": {
+    "file": "style-BiIGMIox.css",
+    "src": "assets/src/css/app.scss",
+    "isEntry": true
+  },
+  "assets/src/js/app.js": {
+    "file": "app-CHuXgRMf.js",
+    "name": "app",
+    "src": "assets/src/js/app.js",
+    "isEntry": true
+  }
+}
