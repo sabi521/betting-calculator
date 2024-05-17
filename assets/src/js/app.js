@@ -20,7 +20,6 @@ function domReady(fn) {
  */
 domReady(() => {
   console.log("The DOM is ready! 🚀");
-
   var slider = document.getElementById("slideRange");
   var output = document.getElementById("stake");
 
@@ -189,6 +188,13 @@ domReady(() => {
     // Set default values for input fields
     americanOddsInput.value = "105"; // Set to your default value
     betAmountInput.value = "100"; // Set to your default value
+
+    // Reset the bet amount slider to its default value
+    slider.value = betAmountInput.value; // Ensure this matches the default bet amount
+    updateSliderBackground();
+
+    // Reset the odds slider to its default value
+    rangeValue.value = americanOddsInput.value; // Ensure this matches the default odds value
 
     // Trigger the calculateValues function to update the values
     calculateValues();
@@ -451,4 +457,21 @@ domReady(() => {
       parlayOutput.value = parlayOutput.defaultValue;
       updateParlaySliderBackground();
     });
+
+  /**
+   *
+   * make all the imput types to select number only
+   */
+  // Select all inputs with a specific class
+  const numberInputs = document.querySelectorAll(".number-only");
+
+  // Add input event listener to each selected input
+  numberInputs.forEach((input) => {
+    input.addEventListener("input", validateNumberInput);
+  });
+
+  function validateNumberInput(event) {
+    const input = event.target;
+    input.value = input.value.replace(/[^0-9]/g, "");
+  }
 });
