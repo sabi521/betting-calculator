@@ -472,6 +472,12 @@ domReady(() => {
 
   function validateNumberInput(event) {
     const input = event.target;
-    input.value = input.value.replace(/[^0-9]/g, "");
+    // Allow only numbers and an optional leading minus sign
+    input.value = input.value.replace(/[^0-9-]/g, "");
+
+    // Ensure there is only one leading minus sign
+    if (input.value.includes("-")) {
+      input.value = "-" + input.value.split("-").join("");
+    }
   }
 });
