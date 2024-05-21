@@ -38,9 +38,14 @@ domReady(() => {
   output.addEventListener("input", function () {
     var value = parseFloat(output.value);
 
-    // Check if the entered value is within the slider range
+    // Check if the entered value is within the slider range and enforce the max limit
     if (value >= parseFloat(slider.min) && value <= parseFloat(slider.max)) {
       slider.value = value;
+      updateSliderBackground();
+      calculateValues();
+    } else if (value > parseFloat(slider.max)) {
+      output.value = slider.max;
+      slider.value = slider.max;
       updateSliderBackground();
       calculateValues();
     }
@@ -51,9 +56,6 @@ domReady(() => {
     var percent =
       ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
 
-    // Calculate the remaining percentage
-    var remainingPercent = 100 - percent;
-
     // Set the background color based on the percentage
     slider.style.background =
       "linear-gradient(to right, #000000 " +
@@ -61,7 +63,7 @@ domReady(() => {
       "%, #f1f1f5 " +
       percent +
       "%, #f1f1f5 " +
-      remainingPercent +
+      (100 - percent) +
       "%)";
   }
 
@@ -76,6 +78,7 @@ domReady(() => {
     updateRangeValue();
     calculateValues();
   });
+
   rangeValue.addEventListener("input", function () {
     updateAmericanOdds();
     calculateValues();
@@ -83,15 +86,26 @@ domReady(() => {
 
   // Function to update the slider based on the input field value
   function updateRangeValue() {
-    // Update the value of the slider
-    rangeValue.value = americanOddsInput.value;
+    var value = parseFloat(americanOddsInput.value);
+
+    // Enforce the max and min limits
+    if (value > parseFloat(americanOddsInput.max)) {
+      value = americanOddsInput.max;
+    } else if (value < parseFloat(americanOddsInput.min)) {
+      value = americanOddsInput.min;
+    }
+
+    americanOddsInput.value = value;
+    rangeValue.value = value;
   }
 
   // Function to update the input field based on the slider value
   function updateAmericanOdds() {
-    // Update the value of the input field
     americanOddsInput.value = rangeValue.value;
   }
+
+  // Initial synchronization
+  updateRangeValue();
 
   /** Payout calculation */
 

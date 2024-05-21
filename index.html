@@ -48,6 +48,7 @@
                       step="1"
                       min="0"
                       value="100"
+                      max="1000000"
                     />
                   </div>
                 </div>
@@ -96,10 +97,12 @@
                   >
                   <div class="relative w-[170px] h-[40px]">
                     <input
-                      type="text"
+                      type="number"
                       class="number-only w-full h-full bg-fuji-light text-fuji-grey text-lg font-extrabold rounded-md border border-stone-300 focus:border-fuji-grey text-left p-0 indent-[32%]"
                       id="americanOdds"
                       value="105"
+                      max="100000"
+                      min="-100000"
                     />
                   </div>
                 </div>
@@ -120,7 +123,7 @@
                           #f1f1f5 50%
                         );
                       "
-                      value="0"
+                      value="105"
                       id="rangeValue"
                     />
                     <div class="flex justify-between items-center mt-1">
